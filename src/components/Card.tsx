@@ -1,18 +1,25 @@
 type CardProps = {
-    title: string,
-    imgUrl: string,
-    imgAlt: string,
-    position: number
-}
+  title: string;
+  imgUrl: string;
+  imgAlt: string;
+  position: number;
+};
 const Card = (props: CardProps) => {
-    const className= "card-" + props.position;
-    return (
+  const cardClassName = "card card-" + props.position;
+  const cardImage = "card-image-" + props.position;
 
-    <div className={className}>
+  console.log("cardClassName=::", cardClassName);
+  console.log("cardImage=::", cardImage);
+
+
+  return (
+    <>
+      <div className={cardClassName} draggable="true">
         <p>{props.title}</p>
-        <img className="card-image" src= {props.imgUrl} alt= {props.imgAlt}/>
-    </div>
-  )
-}
+        <img className={cardImage} src={props.imgUrl} alt={props.imgAlt} />
+      </div>
+    </>
+  );
+};
 
-export default Card
+export default Card;

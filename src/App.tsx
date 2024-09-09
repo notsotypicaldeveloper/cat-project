@@ -1,10 +1,17 @@
-import Card from "./components/Card.tsx";
+import { useEffect, useState } from "react";
+import Card from "./components/Card";
+import SpinnerLoader from "./components/SpinnerLoader";
 import "./App.css";
 
 function App() {
-  // const [count, setCount] = useState(0)
+  const [showSpinner, setShowSpinner] = useState(true);
 
-  // const {title, setTitle} = useState({});
+  // Here, we will hit backend server, for getting data
+  useEffect(() => {
+    setTimeout(() => {
+      setShowSpinner(false);
+    }, 5000);
+  }, []);
 
   const cardData = [
     { type: "bank-draft", title: "Bank Draft", position: 0 },
@@ -16,7 +23,8 @@ function App() {
 
   return (
     <>
-      <div className="grid-container">
+      <div className="home-page-container">
+        <SpinnerLoader showSpinner={showSpinner} />
         {cardData.map((data, index) => {
           const { type, title, position } = data;
           const imgUrl = "./" + type + ".png";
@@ -34,31 +42,6 @@ function App() {
       </div>
       <div></div>
     </>
-    // <Card title='Bank Draft' imgUrl=''/>
-
-    // <>
-    //   <h1>Heyyyyyy!</h1>
-    //   <div>
-    //     <a href="https://vitejs.dev" target="_blank">
-    //       <img src={viteLogo} className="logo" alt="Vite logo" />
-    //     </a>
-    //     <a href="https://react.dev" target="_blank">
-    //       <img src={reactLogo} className="logo react" alt="React logo" />
-    //     </a>
-    //   </div>
-    //   <h1>Vite + React</h1>
-    //   <div className="card">
-    //     <button onClick={() => setCount((count) => count + 1)}>
-    //       count is {count}
-    //     </button>
-    //     <p>
-    //       Edit <code>src/App.tsx</code> and save to test HMR
-    //     </p>
-    //   </div>
-    //   <p className="read-the-docs">
-    //     Click on the Vite and React logos to learn more
-    //   </p>
-    // </>
   );
 }
 
