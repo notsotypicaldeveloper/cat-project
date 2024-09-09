@@ -10,11 +10,11 @@
   grid-column-gap: 2em;
   grid-row-gap: 5em;
   grid-auto-flow: row;
+  background-color: rgb(255, 0, 149);
 }
 
 .card {
-  height: auto;
-  width: auto;
+ cursor: pointer;
 }
 
 .card-image-0, .card-image-1, .card-image-2{
@@ -25,5 +25,13 @@
 .card-image-3, .card-image-4 {
   height: 280px;
   width: 280px;
+}
+ 
+.overlay-container {
+  background-color: green;
+  position: fixed;
+  z-index: 10;
+  width: fit-content;
+  height: fit-content;
 }
 
