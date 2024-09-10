@@ -27,7 +27,9 @@ Intentionally, ``Bill of Lading 2`` image of around 35.3 MB, so that can verify 
 
 5) Use react hooks and keep images in public folder, so that can access it from relative path.
 
-6) Use msw(Mock Service Worker) for getting mock api reponse.
+6) For closing the overlay image, we use react useEffect webhook,and when for ``keydown`` event, we get ``Escape`` key, we will close the overlay image.
+ 
+7) Use msw(Mock Service Worker) for getting mock api reponse.
 
 
 

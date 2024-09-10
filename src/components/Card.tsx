@@ -11,11 +11,8 @@ type CardProps = {
 const Card = (props: CardProps) => {
   useEffect(() => {
     console.log("openOverlay===:::", openOverlay);
-    
-    // if(openOverlay)
-    // {
-      document.addEventListener("keydown", detectKeyDown, true);
-    // }
+  
+    document.addEventListener("keydown", detectKeyDown, true);
   }, []);
 
   const [loading, setLoading] = useState(true);
