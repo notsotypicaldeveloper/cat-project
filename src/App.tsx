@@ -3,28 +3,25 @@ import Card from "./components/Card";
 import SpinnerLoader from "./components/SpinnerLoader";
 import "./App.css";
 
+
 function App() {
   const [showSpinner, setShowSpinner] = useState(true);
+  const [cardData, setCardData] = useState([]);
 
   // Here, we will hit backend server, for getting data
   useEffect(() => {
-    setTimeout(() => {
+    fetch("/api/cats")
+    .then((res)=> res.json())
+    .then((data)=>{
+      console.log(data);
+      setCardData(data);
       setShowSpinner(false);
-    }, 5000);
+    })
   }, []);
-
-  const cardData = [
-    { type: "bank-draft", title: "Bank Draft", position: 0 },
-    { type: "bill-of-lading", title: "Bill of Lading", position: 1 },
-    { type: "invoice", title: "Invoice", position: 2 },
-    { type: "bank-draft-2", title: "Bank Draft 2", position: 3 },
-    { type: "bill-of-lading-2", title: "Bill of Lading 2", position: 4 },
-  ];
 
   return (
     <>
       <div className="home-page-container">
-        <SpinnerLoader showSpinner={showSpinner} />
         {cardData.map((data, index) => {
           const { type, title, position } = data;
           const imgUrl = "./" + type + ".png";
