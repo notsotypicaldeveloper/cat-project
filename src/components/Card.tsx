@@ -1,5 +1,5 @@
 import Overlay from "./Overlay";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import SpinnerLoader from "./SpinnerLoader";
 
 type CardProps = {
@@ -16,7 +16,7 @@ const Card = (props: CardProps) => {
     setLoading(false)
   }
   const handleClick = () => {
-    setOpenOverlay(true);
+    setOpenOverlay(!openOverlay);
   }
 
   return (
@@ -31,7 +31,9 @@ const Card = (props: CardProps) => {
             <div style={{display: loading ? "none" : "block"}}>
               <img className="card-image" src={props.imgUrl} alt={props.imgAlt} onLoad={handleLoading} onClick={handleClick}/>
 
-              {/* <Overlay openOverlay={openOverlay} title={props.title} imgUrl={props.imgUrl}imgAlt={props.imgAlt}  /> */}
+              <div onClick={handleClick}>
+              {openOverlay && <Overlay title={props.title} imgUrl={props.imgUrl}imgAlt={props.imgAlt}  />}
+              </div>
             </div>
           </>
         }
