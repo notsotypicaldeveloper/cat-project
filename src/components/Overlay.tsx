@@ -4,6 +4,7 @@ type OverlayProps = {
   imgAlt: string;
 };
 const Overlay = (props: OverlayProps) => {
+
   return (
     <>
       <div>

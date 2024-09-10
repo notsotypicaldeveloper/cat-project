@@ -1,5 +1,5 @@
 import Overlay from "./Overlay";
-import {useState } from "react";
+import { useEffect, useState } from "react";
 import SpinnerLoader from "./SpinnerLoader";
 
 type CardProps = {
@@ -9,15 +9,35 @@ type CardProps = {
   position: number;
 };
 const Card = (props: CardProps) => {
+  useEffect(() => {
+    console.log("openOverlay===:::", openOverlay);
+    
+    // if(openOverlay)
+    // {
+      document.addEventListener("keydown", detectKeyDown, true);
+    // }
+  }, []);
+
   const [loading, setLoading] = useState(true);
   const [openOverlay, setOpenOverlay] = useState(false);
 
+  
+
+  const detectKeyDown = (e: any) => {
+    console.log("cliked key==", e);
+    if (e.key == "Escape") {
+      console.log("User press escape key, close the overlay");
+      setOpenOverlay(false);
+    }
+  };
+
   const handleLoading = () => {
-    setLoading(false)
-  }
-  const handleClick = () => {
+    setLoading(false);
+  };
+  const handleClick = (e: any) => {
+    console.log("e===:::", e);
     setOpenOverlay(!openOverlay);
-  }
+  };
 
   return (
     <>
@@ -25,19 +45,31 @@ const Card = (props: CardProps) => {
         {
           <>
             <p> {props.title}</p>
-            <div style={{display: loading ? "block" : "none"}}>
+            <div style={{ display: loading ? "block" : "none" }}>
               <SpinnerLoader />
             </div>
-            <div style={{display: loading ? "none" : "block"}}>
-              <img className="card-image" src={props.imgUrl} alt={props.imgAlt} onLoad={handleLoading} onClick={handleClick}/>
+            <div style={{ display: loading ? "none" : "block" }}>
+              <img
+                className="card-image"
+                src={props.imgUrl}
+                alt={props.imgAlt}
+                onLoad={handleLoading}
+                onClick={handleClick}
+              />
 
-              <div onClick={handleClick}>
-              {openOverlay && <Overlay title={props.title} imgUrl={props.imgUrl}imgAlt={props.imgAlt}  />}
+              <div>
+                {openOverlay && (
+                  <Overlay
+                    title={props.title}
+                    imgUrl={props.imgUrl}
+                    imgAlt={props.imgAlt}
+                  />
+                )}
               </div>
             </div>
           </>
         }
-      </div>  
+      </div>
     </>
   );
 };
