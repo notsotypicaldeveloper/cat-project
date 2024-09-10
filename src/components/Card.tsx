@@ -1,5 +1,6 @@
 import Overlay from "./Overlay";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import SpinnerLoader from "./SpinnerLoader";
 
 type CardProps = {
   title: string;
@@ -8,36 +9,31 @@ type CardProps = {
   position: number;
 };
 const Card = (props: CardProps) => {
+  const [loading, setLoading] = useState(true);
+  const [openOverlay, setOpenOverlay] = useState(false);
+
+  const handleLoading = () => {
+    setLoading(false)
+  }
   const cardClassName = "card card-" + props.position;
   const cardImage = "card-image-" + props.position;
 
-  console.log("cardClassName=::", cardClassName);
-  console.log("cardImage=::", cardImage);
-
-  const [openOverlay, setOpenOverlay] = useState(false);
-
-  // let menuRef = useRef(); 
-  useEffect(()=>{
-    let handler = (e:any) =>{
-      if(e.target)
-      {
-        setOpenOverlay(true);
-      }
-      else {
-        setOpenOverlay(false);
-      }
-    }
-    document.addEventListener("click",handler)
-  })
+ 
   return (
     <>
-      <div className={cardClassName} >
-        <p>{props.title}</p>
-        <img className={cardImage} src={props.imgUrl} alt={props.imgAlt} />
-        <button >Open Overlay</button>
-      </div>
-
-      <Overlay openOverlay={openOverlay} title={props.title} imgUrl={props.imgUrl} imgAlt={props.imgAlt}/>
+      <div className={cardClassName}>
+        {
+          <>
+            <p> {props.title}</p>
+            <div style={{display: loading ? "block" : "none"}}>
+              <SpinnerLoader />
+            </div>
+            <div style={{display: loading ? "none" : "block"}}>
+              <img className={cardImage} src={props.imgUrl} alt={props.imgAlt} onLoad={handleLoading} />
+            </div>
+          </>
+        }
+      </div>  
     </>
   );
 };

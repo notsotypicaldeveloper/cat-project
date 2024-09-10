@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
 import Card from "./components/Card";
-import SpinnerLoader from "./components/SpinnerLoader";
 import "./App.css";
 
 
 function App() {
-  const [showSpinner, setShowSpinner] = useState(true);
   const [cardData, setCardData] = useState([]);
 
   // Here, we will hit backend server, for getting data
+  // right now, we are hitting our ock service worker
   useEffect(() => {
     fetch("/api/cats")
     .then((res)=> res.json())
     .then((data)=>{
       console.log(data);
       setCardData(data);
-      setShowSpinner(false);
     })
   }, []);
 

@@ -11,9 +11,7 @@ const Overlay = (props: OverlayProps) => {
         {props.openOverlay? (
             <div className="overlay-container">
                   <p>{props.title}</p>
-                  <img src={props.imgUrl} alt={props.imgAlt} />
-                Hi from overlay
-                
+                  <img src={props.imgUrl} alt={props.imgAlt} />                
             </div>
             ):(<></>)}
     </div>

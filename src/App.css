@@ -17,15 +17,11 @@
  cursor: pointer;
 }
 
-.card-image-0, .card-image-1, .card-image-2{
+.card-image-0, .card-image-1, .card-image-2, .card-image-3, .card-image-4{
   height: 280px;
   width: 280px;
 } 
 
-.card-image-3, .card-image-4 {
-  height: 280px;
-  width: 280px;
-}
  
 .overlay-container {
   background-color: green;
@@ -35,3 +31,19 @@
   height: fit-content;
 }
 
+
+.spinner-container {
+  height: 280px;
+  width: 280px;
+  background-color: #2c2c2c;
+  position: relative;
+
+}
+.spinner-svg {
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

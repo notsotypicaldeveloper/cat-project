@@ -1,0 +1,8 @@
+version: "2"
+
+services:
+  cat_app:
+    build: .
+    container_name: cat_app
+    ports:
+      - "3000:80"

@@ -1,16 +1,9 @@
-type SpinnerProps = {
-    showSpinner: boolean
-}
-const SpinnerLoader = (props: SpinnerProps) => {  
-    console.log("props.showSpinner===", props.showSpinner) 
+const SpinnerLoader = () => {  
     return (
         <>  
-            {props.showSpinner ?(
-                <img src='./svg-spinners--90-ring-with-bg.svg' />
-            ) : (
-                <></>
-            )
-            }
+            <div className="spinner-container">
+            <img className= "spinner-svg" src='./svg-spinners--90-ring-with-bg.svg' />
+            </div>
         </>
     )
 }
