@@ -15,13 +15,13 @@ const Card = (props: CardProps) => {
   const handleLoading = () => {
     setLoading(false)
   }
-  const cardClassName = "card card-" + props.position;
-  const cardImage = "card-image-" + props.position;
+  const handleClick = () => {
+    setOpenOverlay(true);
+  }
 
- 
   return (
     <>
-      <div className={cardClassName}>
+      <div className="card" draggable>
         {
           <>
             <p> {props.title}</p>
@@ -29,7 +29,9 @@ const Card = (props: CardProps) => {
               <SpinnerLoader />
             </div>
             <div style={{display: loading ? "none" : "block"}}>
-              <img className={cardImage} src={props.imgUrl} alt={props.imgAlt} onLoad={handleLoading} />
+              <img className="card-image" src={props.imgUrl} alt={props.imgAlt} onLoad={handleLoading} onClick={handleClick}/>
+
+              {/* <Overlay openOverlay={openOverlay} title={props.title} imgUrl={props.imgUrl}imgAlt={props.imgAlt}  /> */}
             </div>
           </>
         }

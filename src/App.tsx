@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Card from "./components/Card";
 import "./App.css";
 
@@ -17,20 +17,33 @@ function App() {
     })
   }, []);
 
+  const dragCat = useRef<number>(0);
+  // cat with which we are swapping
+  const draggedOverCat = useRef<number>(0);
+
+  function handleSort() {
+    const cardDataClone = [...cardData];
+    const temp = cardDataClone[dragCat.current];
+    cardDataClone[dragCat.current]= cardDataClone[draggedOverCat.current];
+    cardDataClone[draggedOverCat.current] = temp;
+    setCardData(cardDataClone);
+
+  }
   return (
     <>
       <div className="home-page-container">
+
         {cardData.map((data, index) => {
           const { type, title, position } = data;
           const imgUrl = "./" + type + ".png";
           return (
-            <div key={index}>
-              <Card
-                title={title}
-                imgUrl={imgUrl}
-                imgAlt={type}
-                position={position}
-              />
+            <div key={index} draggable="true"  
+            onDragStart={() => (dragCat.current = index)}
+            onDragEnter={() => (draggedOverCat.current = index)}
+            onDragEnd={handleSort}
+            onDragOver={(e) => e.preventDefault()}
+            >
+              <Card title={title} imgUrl={imgUrl} imgAlt={type} position={position}/>
             </div>
           );
         })}

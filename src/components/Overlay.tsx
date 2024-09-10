@@ -1,3 +1,4 @@
+
 type OverlayProps = {
     openOverlay: boolean;
     title: string;
@@ -8,12 +9,15 @@ const Overlay = (props: OverlayProps) => {
   return (
     <>
     <div>
-        {props.openOverlay? (
-            <div className="overlay-container">
-                  <p>{props.title}</p>
-                  <img src={props.imgUrl} alt={props.imgAlt} />                
-            </div>
-            ):(<></>)}
+        {props.openOverlay}? (
+                  <div className="overlay-container">
+                    <div className="overlay-content">
+                      <h2>{props.title}</h2>
+                      <img className="overlay-img" src={props.imgUrl} alt={props.imgAlt}  />
+
+                    </div>
+                  </div>
+            ):(<></>)
     </div>
     </>
   )

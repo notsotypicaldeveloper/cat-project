@@ -22,6 +22,14 @@ Imp: Here, it is imp. that both loader and image should be part to DOM,so  we ca
 
 Intentionally, ``Bill of Lading 2`` image of around 35.3 MB, so that can verify spinner loader working fine.
 
+4) For drag and drop,use react 'draggable', onDragStart, onDragEnter and our handleSort function to complete the drag operation
+
+
+5) Use react hooks and keep images in public folder, so that can access it from relative path.
+
+6) Use msw(Mock Service Worker) for getting mock api reponse.
+
+
 
 
 
