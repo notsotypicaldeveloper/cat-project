@@ -6,16 +6,37 @@ import "./App.css";
 function App() {
   const [cardData, setCardData] = useState([]);
 
+  useState(()=>{
+
+    console.log(`CAT_APP_CARD_DATA==:::`, window.localStorage.getItem('CAT_APP_CARD_DATA'));
+
+    if(
+      !window.localStorage.getItem('CAT_APP_CARD_DATA') 
+
+      || 
+      (
+        JSON.parse(window.localStorage.getItem('CAT_APP_CARD_DATA') || "")?.length == 0
+      )  
+    )
+    {
+      console.log(`Hitting mock server to get the data`);
+      fetch("/api/cats")
+      .then((res)=> res.json())
+      .then((data)=>{
+        console.log(data);
+        setCardData(data);
+      })
+    }
+    else {
+      setCardData(JSON.parse(window.localStorage.getItem('CAT_APP_CARD_DATA') as any));
+    }
+   
+  })
   // Here, we will hit backend server, for getting data
-  // right now, we are hitting our ock service worker
-  useEffect(() => {
-    fetch("/api/cats")
-    .then((res)=> res.json())
-    .then((data)=>{
-      console.log(data);
-      setCardData(data);
-    })
-  }, []);
+  // right now, we are hitting our mock service worker
+  useEffect(()=>{
+    window.localStorage.setItem('CAT_APP_CARD_DATA', JSON.stringify(cardData));
+  }, cardData);
 
   const dragCat = useRef<number>(0);
   // cat with which we are swapping
