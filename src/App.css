@@ -1,8 +1,10 @@
-
+* {
+  box-sizing: border-box;
+}
 .home-page-container {
   display: grid;
   /* background-color: rgb(0, 195, 255); */
-  margin: 40px 40px 40px 40px;
+  margin: 40px;
   grid-template-columns: auto auto auto; 
   grid-template-rows: auto auto auto; 
 

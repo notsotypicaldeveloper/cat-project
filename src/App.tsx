@@ -21,11 +21,44 @@ function App() {
   // cat with which we are swapping
   const draggedOverCat = useRef<number>(0);
 
+  function array_move(arr:any[], old_index: number, new_index: number) {
+    while (old_index < 0) {
+        old_index += arr.length;
+    }
+    while (new_index < 0) {
+        new_index += arr.length;
+    }
+    if (new_index >= arr.length) {
+        var k = new_index - arr.length + 1;
+        while (k--) {
+            arr.push(undefined);
+        }
+    }
+    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+    // return arr; // for testing purposes
+};
+
   function handleSort() {
     const cardDataClone = [...cardData];
-    const temp = cardDataClone[dragCat.current];
-    cardDataClone[dragCat.current]= cardDataClone[draggedOverCat.current];
-    cardDataClone[draggedOverCat.current] = temp;
+    let length = cardData.length;
+    console.log("length===:::", length);
+    console.log("dragCat.current===:::", dragCat.current);
+    console.log("draggedOverCat.current===:::", draggedOverCat.current);
+
+    array_move(cardDataClone, dragCat.current, draggedOverCat.current);
+    // dragCat.current
+    // // When we drag and drop something, complete array will rotate by 1
+    // const cardDataCloneRotatedBy1 = [...cardData];
+    // const lastElement = cardDataClone[cardData.length];
+    // for(let i = cardData.length-1; i > 0; i--) {
+      
+    // }
+
+    // // We have to move all element by 1 upto dragCat.current index
+    // // Have to start draging
+    // const temp = cardDataClone[dragCat.current];
+    // cardDataClone[dragCat.current]= cardDataClone[draggedOverCat.current];
+    // cardDataClone[draggedOverCat.current] = temp;
     setCardData(cardDataClone);
 
   }
