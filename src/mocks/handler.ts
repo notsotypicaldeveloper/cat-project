@@ -16,6 +16,13 @@ export const handlers = [
 
   http.post('/api/cats', async({request})=>{
     const requestBody = await request.json();
+    if(!requestBody) {
+      return;
+    }
     console.log("requestBody===:::", requestBody);
+
+    catData = requestBody as any;
+
+    return HttpResponse.json(catData);
   })
 ];

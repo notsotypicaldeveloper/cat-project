@@ -5,21 +5,14 @@ import "./App.css";
 
 function App() {
   const [cardData, setCardData] = useState([]);
+  const [isCardDataChanged, setIsCardDataChanged] = useState(false);
 
   useState(()=>{
-
-    console.log(`CAT_APP_CARD_DATA==:::`, window.localStorage.getItem('CAT_APP_CARD_DATA'));
-
-    if(
-      !window.localStorage.getItem('CAT_APP_CARD_DATA') 
-
-      || 
-      (
+    if(!window.localStorage.getItem('CAT_APP_CARD_DATA') || (
         JSON.parse(window.localStorage.getItem('CAT_APP_CARD_DATA') || "")?.length == 0
       )  
     )
     {
-      console.log(`Hitting mock server to get the data`);
       fetch("/api/cats")
       .then((res)=> res.json())
       .then((data)=>{
@@ -30,8 +23,10 @@ function App() {
     else {
       setCardData(JSON.parse(window.localStorage.getItem('CAT_APP_CARD_DATA') as any));
     }
-   
   })
+
+    
+  
   // Here, we will hit backend server, for getting data
   // right now, we are hitting our mock service worker
   useEffect(()=>{
@@ -42,46 +37,16 @@ function App() {
   // cat with which we are swapping
   const draggedOverCat = useRef<number>(0);
 
-  function array_move(arr:any[], old_index: number, new_index: number) {
-    while (old_index < 0) {
-        old_index += arr.length;
-    }
-    while (new_index < 0) {
-        new_index += arr.length;
-    }
-    if (new_index >= arr.length) {
-        var k = new_index - arr.length + 1;
-        while (k--) {
-            arr.push(undefined);
-        }
-    }
-    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-    // return arr; // for testing purposes
-};
+function array_move(arr:any[], old_index: number, new_index: number) {
+  const temp = arr[old_index];
+  arr.splice(old_index,1);
+  arr.splice(new_index, 0, temp);
+}
 
   function handleSort() {
     const cardDataClone = [...cardData];
-    let length = cardData.length;
-    console.log("length===:::", length);
-    console.log("dragCat.current===:::", dragCat.current);
-    console.log("draggedOverCat.current===:::", draggedOverCat.current);
-
     array_move(cardDataClone, dragCat.current, draggedOverCat.current);
-    // dragCat.current
-    // // When we drag and drop something, complete array will rotate by 1
-    // const cardDataCloneRotatedBy1 = [...cardData];
-    // const lastElement = cardDataClone[cardData.length];
-    // for(let i = cardData.length-1; i > 0; i--) {
-      
-    // }
-
-    // // We have to move all element by 1 upto dragCat.current index
-    // // Have to start draging
-    // const temp = cardDataClone[dragCat.current];
-    // cardDataClone[dragCat.current]= cardDataClone[draggedOverCat.current];
-    // cardDataClone[draggedOverCat.current] = temp;
     setCardData(cardDataClone);
-
   }
   return (
     <>
