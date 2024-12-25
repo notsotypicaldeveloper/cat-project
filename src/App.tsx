@@ -5,7 +5,7 @@ import "./App.css";
 
 function App() {
   const [cardData, setCardData] = useState([]);
-  const [isCardDataChanged, setIsCardDataChanged] = useState(false);
+  // const [isCardDataChanged, setIsCardDataChanged] = useState(false);
 
   useState(()=>{
     if(!window.localStorage.getItem('CAT_APP_CARD_DATA') || (
